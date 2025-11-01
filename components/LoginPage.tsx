@@ -19,11 +19,9 @@ const LoginPage: React.FC = () => {
       return;
     }
     try {
-      // Firebase expects email format. 
-      // We will append a dummy domain if user just enters username.
-      const formattedEmail = email.includes('@') ? email : `${email.toLowerCase()}@matehost.com`;
-      await signInWithEmailAndPassword(auth, formattedEmail, password);
-      // Auth state change will be handled by the listener in App.tsx
+      // Iniciar sesión con el correo electrónico exacto que ingresa el usuario
+      await signInWithEmailAndPassword(auth, email, password);
+      // El cambio de estado de autenticación será manejado por el listener en App.tsx
     } catch (err: any) {
       setError('Correo o contraseña inválidos.');
       console.error(err);
@@ -49,14 +47,14 @@ const LoginPage: React.FC = () => {
         >
           <div className="mb-4">
             <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" htmlFor="email">
-              Usuario o Correo
+              Correo Electrónico
             </label>
             <input
               id="email"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Ej: Sabri o sabri@matehost.com"
+              placeholder="Ej: sabri@email.com"
               className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
               disabled={loading}
             />
